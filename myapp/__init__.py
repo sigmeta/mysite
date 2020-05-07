@@ -2,7 +2,6 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from flask_login import LoginManager,login_user,login_required,current_user
 
 db = SQLAlchemy()
 def create_app(test_config=None):
@@ -16,7 +15,7 @@ def create_app(test_config=None):
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
-        app.config.from_pyfile('../config.py', silent=True)
+        app.config.from_pyfile(os.path.join(app.root_path,'config.py'), silent=False)
     else:
         # load the test config if passed in
         app.config.from_mapping(test_config)
@@ -27,20 +26,21 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    from myapp.auth import login_required
+    from myapp.views.auth import login_required
     # a simple page that says hello
     @app.route('/hello')
     @login_required
     def hello():
         return 'Hello, World!'
 
-    from . import auth
+    from myapp.views import auth
     app.register_blueprint(auth.bp)
 
     db = SQLAlchemy()
     db.init_app(app)
 
-    from . import db_orm
+    # Initialize database with SQLAlchemy
+    from myapp.database import db_orm
     db_orm.init_app(app)
 
     return app

@@ -1,6 +1,6 @@
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
-from run import app
+from app import app
 from myapp.models import *
 
 admin = Admin(app, name='Myapp', template_mode='bootstrap3')
