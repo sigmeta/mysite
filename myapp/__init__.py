@@ -2,8 +2,11 @@ import os
 
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
 
 db = SQLAlchemy()
+login_manager = LoginManager()
+
 def create_app(test_config=None):
     # create and configure the app
     app = Flask(__name__, instance_relative_config=True)
@@ -38,6 +41,9 @@ def create_app(test_config=None):
 
     db = SQLAlchemy()
     db.init_app(app)
+
+    login_manager.init_app(app)
+    login_manager.login_view = 'auth.login'
 
     # Initialize database with SQLAlchemy
     from myapp.database import db_orm
