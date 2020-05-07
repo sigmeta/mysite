@@ -1,0 +1,13 @@
+#SQLALCHEMY_DATABASE_URI = "sqlite:///instance\\myapp.sqlite"
+SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+'''mysql
+DIALECT = 'mysql'
+DRIVER = 'pymysql'
+USERNAME = 'abc'
+PASSWORD = '1234'
+HOST = '127.0.0.1'
+PORT = '3306'
+DATABASE = 'mysite'
+SQLALCHEMY_DATABASE_URI = "{}+{}://{}:{}@{}:{}/{}?charset=utf8".format(DIALECT,DRIVER,USERNAME,PASSWORD,HOST,PORT,DATABASE)
+SQLALCHEMY_TRACK_MODIFICATIONS = False'''
